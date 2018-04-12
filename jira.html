@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Convert CSV to Tables on JIRA</title>
+	<style>
+		main {
+			width: 600px;
+			margin: 0 auto;
+		}
+		textarea {
+			display: block;
+			width: 100%;
+			margin: 10px 5px;
+		}
+		pre {
+			overflow: auto;
+		}
+	</style>
+</head>
+<body>
+<main>
+	<form>
+		<label for="CSV">Input the CSV content:</label>
+		<textarea id="CSVcontent" rows="10" placeholder="Input your CSV content here"></textarea>
+		<button type="button" id="btn-convert">Convert to JIRA Table</button>
+	</form>
+	<pre id="jira-formatted"></pre>
+</main>
+
+<script>
+	let button = document.getElementById('btn-convert');
+	let CSVcontent = document.getElementById('CSVcontent');
+	let output = document.getElementById('jira-formatted');
+
+	function convertContent(e) {
+		let converted = '';
+		let split = '';
+
+		converted = CSVcontent.value.trim().replace(new RegExp(',', 'g'), ' | ');
+		//breaks each new line 
+		split = converted.split('\n');
+		generateOutput(split);
+	}
+
+	function generateOutput(content) {
+		let finalValue = '';
+
+		content.forEach((line) => {
+			finalValue += `| ${line} |\n`;
+		});
+
+		output.innerHTML = finalValue;
+	}
+
+	button.addEventListener('click', convertContent);
+
+</script>
+
+</body>
+</html>
+
+
+
