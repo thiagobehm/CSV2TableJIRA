@@ -53,7 +53,12 @@
 		output.innerHTML = finalValue;
 	}
 
+	function selectText() {
+		window.getSelection().selectAllChildren(output);
+	}
+
 	button.addEventListener('click', convertContent);
+	output.addEventListener('click', selectText);
 
 </script>
 
